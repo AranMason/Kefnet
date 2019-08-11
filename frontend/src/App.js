@@ -4,28 +4,17 @@ import './App.css';
 
 import { Helmet } from 'react-helmet';
 
-import axios from 'axios';
+import Container from './template/Container'
 
 function App() {
-
-  // axios.
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Helmet title="Login App">
+        Login
+      </Helmet>
+      <Container>
+
+      </Container>
     </div>
   );
 }

@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var morgan = require('morgan');
+var cors = require('cors');
 
 var Session = require('./middleware/session-handler')
 
@@ -16,7 +17,10 @@ app.set('port', 9000);
 // set morgan to log info about our requests for development use.
 app.use(morgan('dev'));
 
+app.use(cors());
+
 // initialize body-parser to parse incoming parameters requests to req.body
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // initialize cookie-parser to allow us access the cookies stored in the browser. 
