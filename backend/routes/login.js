@@ -44,7 +44,7 @@ router.post('/', handler.isLoggedIn, (req, res) => {
 router.get('/status', handler.isLoggedIn, (req, res) => {
 
     res.json({
-        success: req.session.user ? req.session.user : false,
+        success: req.session.user ? true : false,
         user: req.session.user || {}
     })
 })
