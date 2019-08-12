@@ -8,15 +8,9 @@ import { Provider } from 'react-redux'
 
 import store from './redux/store';
 
-import dotenv from 'dotenv';
+import axios from 'axios'
 
-const result = dotenv.config()
- 
-if (result.error) {
-  throw result.error
-}
-
-console.log(result.parsed)
+axios.defaults.baseURL = 'http://localhost:3001';
 
 console.log(process.env);
 

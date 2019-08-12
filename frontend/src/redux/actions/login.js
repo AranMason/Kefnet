@@ -35,9 +35,9 @@ export function loginUser(username, password) {
     return function(dispatch){
         dispatch(awaitingUserChange())
 
-        console.log(`${process.env.API_URL}/login`)
+        console.log(`/login`)
 
-        return axios.post(`${process.env.API_URL}/login`, {
+        return axios.post(`/login`, {
             username,
             password
         }).then(res => {
@@ -52,7 +52,7 @@ export function logOutUser() {
     return function (dispatch) {
         dispatch(awaitingUserChange())
 
-        return axios.post(`${process.env.API_URL}/logout`).then(res => {
+        return axios.post(`/logout`).then(res => {
             dispatch(completelogOutUser())
         })
     }
