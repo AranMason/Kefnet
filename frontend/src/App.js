@@ -9,7 +9,7 @@ import Container from './template/Container'
 function App() {
   return (
     <div>
-      <Helmet title="Login App">
+      <Helmet title="Kefnet - Magic Stat Tracker">
         Login
       </Helmet>
       <Container>
