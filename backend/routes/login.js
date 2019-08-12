@@ -4,23 +4,13 @@ var cors = require('cors');
 
 var User = require('../models/user');
 
-var Session = require('../middleware/session-handler');
-
 router.options('*', cors())
 
-router.route('/')
-.get(Session.sessionChecker, (req, res) => {
-    res.sendFile(__dirname + '/public/login.html');
-})
-.post((req, res) => {
+router.post('/', (req, res) => {
     var username = req.body.username,
         password = req.body.password;
 
-    console.log(req.body)
-
     User.findOne({ where: { username: username } }).then(function (user) {
-
-        console.log(user);
 
         if (!user || !user.validPassword(password)) {
             res.json({
@@ -36,11 +26,22 @@ router.route('/')
     });
 });
 
-router.route('/signup')
-    .get(Session.sessionChecker, (req, res) => {
-        res.sendFile(__dirname + '/public/signup.html');
-    })
-    .post((req, res) => {
+router.get('/status', (req, res) => {
+    if (req.session.user && req.cookies.user_sid) {
+        res.json({
+            isLoggedIn: true,
+            user: req.session.user
+        })
+    } else {
+        res.json({
+            isLoggedIn: false,
+            user: {}
+        })
+        
+    }
+})
+
+router.post('/signup', (req, res) => {
         User.create({
             username: req.body.username,
             email: req.body.email,
@@ -48,10 +49,10 @@ router.route('/signup')
         })
         .then(user => {
             req.session.user = user.dataValues;
-            res.redirect('/login/dashboard');
+            // res.redirect('/login/dashboard');
         })
         .catch(error => {
-            res.redirect('/login/signup');
+            // res.redirect('/login/signup');
         });
     });
 

@@ -47,11 +47,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// route for Home-Page
-app.get('/', Session.sessionChecker, (req, res) => {
-    res.redirect('/login');
-});
-
 var login = require('./routes/login');
 var dashboard = require('./routes/dashboard');
 var index = require('./routes');
