@@ -10,9 +10,9 @@ export default function(state=initialState, action){
         case LOGIN: {
             return {
                 ...state,
-                isLoggedIn: action.payload.successful,
+                isLoggedIn: action.payload.success,
                 awaitingLogin: false,
-                user: action.payload.successful ? action.payload.user : null
+                user: action.payload.success ? action.payload.user : null
             }
         }
         case AWAITING_USER_CHANGE: {
