@@ -9,9 +9,7 @@ router.get('/', (req, res) => {
 
 // route for user logout
 router.post('/logout', (req, res) => {
-  if (req.session.user && req.cookies.user_sid) {
-      res.clearCookie('user_sid');
-  }
+  res.clearCookie('user_sid');
 });
 
 module.exports = router;
