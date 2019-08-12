@@ -48,11 +48,31 @@ export function loginUser(username, password) {
 }
 
 export function logOutUser() {
+
+    console.log("Leaving")
+
     return function (dispatch) {
-        dispatch(awaitingUserChange())
+        console.log("Test")
+        dispatch(awaitingUserChange());
 
         return axios.post(`/logout`).then(res => {
+            console.log("Log out: ", res);
             dispatch(completelogOutUser())
         })
+    }
+}
+
+export function getLoginStatus() {
+    return function(dispatch) {
+
+        dispatch(awaitingUserChange())
+
+        return axios.get('/login/status', {
+            withCredentials: true
+        }).then(res => {
+            console.log("Loging Status: ", res.data);
+            dispatch(succcessfulLoginUser(res.data))
+          });
+
     }
 }

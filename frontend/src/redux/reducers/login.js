@@ -27,7 +27,7 @@ export default function(state=initialState, action){
                 ...state,
                 isLoggedIn: false,
                 awaitingLogin: false,
-                user: null
+                user: {}
             }
         }
         default:
