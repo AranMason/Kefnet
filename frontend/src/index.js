@@ -11,6 +11,9 @@ import store from './redux/store';
 import axios from 'axios'
 
 axios.defaults.baseURL = 'http://localhost:3001';
+axios.defaults.withCredentials = true
+
+console.log("Axios Defaults: ", axios.defaults)
 
 console.log(process.env);
 
