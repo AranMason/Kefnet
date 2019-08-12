@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
 // route for user logout
 router.post('/logout', (req, res) => {
   res.clearCookie('user_sid');
+  res.status(200).send("Successfully Logged Out");
 });
 
 module.exports = router;
