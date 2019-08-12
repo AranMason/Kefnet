@@ -1,7 +1,6 @@
 // import { LOGIN, SIGN_UP, LOG_OUT } from '../actionTypes';
 
 import axios from 'axios';
-import { log } from 'util';
 
 export const LOGIN = 'LOGIN';
 const succcessfulLoginUser = payload => {
