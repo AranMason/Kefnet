@@ -1,34 +1,35 @@
 import React from 'react';
 
 import Header from './Header';
+import Loading from './Loading';
 
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { getLoginStatus } from '../redux/actions/login'
 
 class Container extends React.Component {
     constructor(props){
         super(props);
 
         this.state = {
+            isLoading: true,
             username: "Unknown",
             success: false
         }
     }
 
     componentDidMount(){
-        // axios({
-        //     method: 'post',
-        //     url: 'http://localhost:3001/login',
-        //     data: {
-        //           username: "Aran",
-        //           password: "12345"
-        //       }
-        //   }).then(res => {
-        //       console.log(res.data);
-        //     this.setState({...res.data})
-        //   })
+ 
+        this.props.loginStatus();
     }
 
     render(){
+
+        if(this.props.isLoading){
+            return (
+                <Loading/>
+            )
+        }
+
         return (
             <div className="Container">
                 <Header/>
@@ -38,4 +39,18 @@ class Container extends React.Component {
     }
 }
 
-export default Container;
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        loginStatus: () => {
+            dispatch(getLoginStatus())
+        }
+    }
+}
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        isLoading: state.login.awaitingLogin
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Container);
