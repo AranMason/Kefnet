@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import login from '../redux/reducers/login';
 
 import { loginUser, logOutUser } from '../redux/actions/login'
 
@@ -18,16 +17,14 @@ class Login extends React.Component {
     }
 
     login(){
-        console.log("test")
         this.props.login("Aran", "12345");
     }
 
     renderLoginButton(){
-
-        if(this.state.isLoggedIn){
+                if(this.props.isLoggedIn){
             return (
-                <button onClick={this.state.logout}>
-                    Logout {this.state.user.username}
+                <button onClick={this.props.logout}>
+                    Logout {this.props.user.username}
                 </button>
             )
         } else {
@@ -43,7 +40,7 @@ class Login extends React.Component {
     render(){
         return (
             <div>
-                Login {this.renderLoginButton()}
+                Login {this.renderLoginButton()} 
             </div>
         )
     }
@@ -62,9 +59,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
+    console.log(state);
     return {
         isLoggedIn: state.login.isLoggedIn,
-        user: state.login.user
+        awaitingLogin: state.login.awaitingLogin,
+        user: state.login.user || {}
     }
 }
 
