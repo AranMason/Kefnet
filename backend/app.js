@@ -17,7 +17,10 @@ app.set('port', 9000);
 // set morgan to log info about our requests for development use.
 app.use(morgan('dev'));
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}));
 
 // initialize body-parser to parse incoming parameters requests to req.body
 app.use(bodyParser.json())
@@ -31,9 +34,12 @@ app.use(session({
     key: 'user_sid',
     secret: 'somerandonstuffs',
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie: {
-        expires: 600000
+        // path: '/',
+        // sameSite: false,
+        // secure: true,
+        expires: 1800000 // 30 Min
     }
 }));
 

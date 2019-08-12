@@ -4,9 +4,22 @@ var cors = require('cors');
 
 var User = require('../models/user');
 
+var handler = require('../middleware/session-handler');
+
 router.options('*', cors())
 
-router.post('/', (req, res) => {
+function sanitiseUser(user){
+    return {
+        id: user.id,
+        username: user.username,
+        email: user.email
+    }
+}
+
+router.post('/', handler.isLoggedIn, (req, res) => {
+
+
+
     var username = req.body.username,
         password = req.body.password;
 
@@ -17,28 +30,23 @@ router.post('/', (req, res) => {
                 success: false
             });
         }  else {
-            req.session.user = user.dataValues;
+            
+            req.session.user = sanitiseUser(user.dataValues);
+            console.log("Successful Login", req.session, req.sessionID)
             res.json({
                 success: true,
-                user: user.dataValues
+                user: req.session.user
             });
         }
     });
 });
 
-router.get('/status', (req, res) => {
-    if (req.session.user && req.cookies.user_sid) {
-        res.json({
-            isLoggedIn: true,
-            user: req.session.user
-        })
-    } else {
-        res.json({
-            isLoggedIn: false,
-            user: {}
-        })
-        
-    }
+router.get('/status', handler.isLoggedIn, (req, res) => {
+
+    res.json({
+        success: req.session.user ? req.session.user : false,
+        user: req.session.user || {}
+    })
 })
 
 router.post('/signup', (req, res) => {
@@ -49,10 +57,13 @@ router.post('/signup', (req, res) => {
         })
         .then(user => {
             req.session.user = user.dataValues;
-            // res.redirect('/login/dashboard');
+            res.json({
+                success: true,
+                user: sanitiseUser(user.dataValues)
+            })
         })
         .catch(error => {
-            // res.redirect('/login/signup');
+            res.status(500).send("Error: ", err);
         });
     });
 
