@@ -32,6 +32,9 @@ router.post('/', handler.isLoggedIn, (req, res) => {
         }  else {
             
             req.session.user = sanitiseUser(user.dataValues);
+
+            req.session.loginAttempts = 0; //If they have managed to login, we don't need to keep tracking
+
             console.log("Successful Login", req.session, req.sessionID)
             res.json({
                 success: true,
