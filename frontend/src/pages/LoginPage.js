@@ -63,7 +63,7 @@ class LoginPage extends React.Component {
             const params = new URLSearchParams(this.props.location.search);
 
             return (
-                <Redirect to={params.get('redirect') || '/'} />
+                <Redirect to={params.get('redirect') || '/dashboard'} />
             )
         }
 
