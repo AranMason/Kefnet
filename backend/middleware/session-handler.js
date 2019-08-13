@@ -15,6 +15,17 @@ var isLoggedIn = (req, res, next) => {
     // })   
 };
 
+var loginAttempt = (req, res, next) => {
+
+    req.session.loginAttempt = (req.session.loginAttempt || 0) + 1;
+
+    if(req.session.loginAttempt > 5){
+        res.status(401).send("Too many login attempts")
+    } else {
+        next()
+    }
+}
+
 var validateSignup = (req, res, next) => {
 
     var validateEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -43,5 +54,6 @@ var validateSignup = (req, res, next) => {
 
 module.exports = {
     isLoggedIn,
+    loginAttempt,
     validateSignup
 }
