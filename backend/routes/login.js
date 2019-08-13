@@ -49,7 +49,7 @@ router.get('/status', handler.isLoggedIn, (req, res) => {
     })
 })
 
-router.post('/signup', (req, res) => {
+router.post('/signup', handler.validateSignup, (req, res) => {
         User.create({
             username: req.body.username,
             email: req.body.email,
@@ -63,7 +63,7 @@ router.post('/signup', (req, res) => {
             })
         })
         .catch(error => {
-            res.status(500).send("Error: ", err);
+            res.status(500).send("Error: ", error);
         });
     });
 

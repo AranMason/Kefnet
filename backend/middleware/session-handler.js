@@ -15,6 +15,33 @@ var isLoggedIn = (req, res, next) => {
     // })   
 };
 
+var validateSignup = (req, res, next) => {
+
+    var validateEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    console.log(req.body);
+
+    var {
+        username,
+        email,
+        password
+    } = req.body;
+
+    if(username.length < 6 && username.length > 32){
+        res.status(400).send("Invalid Username");
+    }
+    else if(!validateEmail.test(email)){
+        res.status(400).send("Invalid Email");
+    }
+    else if(password.length < 8){
+        res.status(400).send("Invalid password");
+    }
+    else {
+        next();
+    }
+}
+
 module.exports = {
-    isLoggedIn
+    isLoggedIn,
+    validateSignup
 }
