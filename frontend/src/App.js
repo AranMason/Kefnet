@@ -13,6 +13,7 @@ import HeaderLogin from './template/HeaderLogin';
 
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import SignUpPage from './pages/SignUpPage';
 
 import { getLoginStatus } from './redux/actions/login';
 import Loading from './template/Loading';
@@ -48,8 +49,8 @@ class App extends React.Component {
           <section className="App-content">
             <Route path="/" exact component={HomePage} />
             <Route path="/login" component={LoginPage} />
-
-            <Route path="/signup" component={HomePage} />
+            <Route path="/signup" component={SignUpPage} />
+            
             <Route path="/dashboard" component={HomePage} />
 
             <Route path="/test" component={Loading} />
