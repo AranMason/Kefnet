@@ -2,7 +2,7 @@ import React from 'react';
 import './LoginPage.css';
 
 import { connect } from 'react-redux';
-import { loginUser, logOutUser } from '../redux/actions/login'
+import { signUpUser } from '../redux/actions/login'
 
 import { Form, Button, Alert } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
@@ -15,8 +15,10 @@ class LoginPage extends React.Component {
 
         this.state = {
             username: "",
+            email: "",
             password: "",
-            attemptedLogin: false,
+            rejected: false,
+            submitted: false
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -26,10 +28,37 @@ class LoginPage extends React.Component {
 
     handleSubmit(e){
         e.preventDefault();
-        this.props.login(this.state.username, this.state.password);
-        this.setState({
-            attemptedLogin: true
-        })
+
+        
+
+        if(!this.validateUsername(this.state.username)){
+            this.setState({
+                rejected: "Invalid Username"
+            })
+        }
+        else if(!this.validateEmail(this.state.email)){
+            this.setState({
+                rejected: "Invalid Email Adress"
+            })
+        }
+        else if(!this.validatePassword(this.state.password)){
+            this.setState({
+                rejected: "Invalid Password"
+            })
+        }
+        else {
+            this.setState({
+                submitted: true
+            })
+    
+            this.props.signup(this.state.username, this.state.email, this.state.password);
+    
+            this.setState({
+                attemptedLogin: true
+            })
+        }
+
+        
     }
 
     handleChange(e){
@@ -38,28 +67,42 @@ class LoginPage extends React.Component {
         });
     }
 
-    invalidLogin(){
+    validateUsername(username){
+        return username.length >= 6;
+    }
 
-        console.log(this.state.attemptedLogin)
+    validateEmail(email){
+        return /^(([^<>()[\]\\.,;:\s@"]+(.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
+    }
 
-        if(this.state.attemptedLogin && !this.props.awaitingLogin){
+    validatePassword(password){
+        return password.length >= 8;
+    }
+
+    renderAlert(rejected){
+        if(!rejected){
+            return null;
+        }
+        else {
             return (
-                <Alert style={{
-                    fontSize: "0.7em"
-                }}variant="warning">
-                    Could not sign in, please check your details and try again.
+                <Alert variant="warning">
+                    {rejected}
                 </Alert>
             )
         }
-
-        return null;
     }
 
     render(){
 
         if(this.props.isLoggedIn){
             return (
-                <Redirect to='/' />
+                <Redirect to='/dashboard' />
+            )
+        }
+
+        if(this.props.submitted){
+            return (
+                <Loading />
             )
         }
 
@@ -67,22 +110,30 @@ class LoginPage extends React.Component {
             <div className="LoginPage" onSubmit={this.handleSubmit}>
                 
                 <Form className="LoginPage-form">
-                    {this.invalidLogin()}
+                    {this.renderAlert(this.state.rejected)}
+                    {/*
+                        User Name
+                    */}
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Username</Form.Label>
-                        <Form.Control type="username" placeholder="Enter username" value={this.state.username} name="username" onChange={this.handleChange}/>
-                        {/* <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                        </Form.Text> */}
+                        <Form.Control type="username" placeholder="Enter username" value={this.state.username} isValid={this.validateUsername(this.state.username)} isInvalid={!this.validateUsername(this.state.username) && this.state.username > 1} name="username" onChange={this.handleChange}/>
                     </Form.Group>
+                    {/*
+                        Email
+                    */}
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Username</Form.Label>
+                        <Form.Control type="email" placeholder="Enter email" value={this.state.email} isValid={this.validateEmail(this.state.email)} name="email" onChange={this.handleChange}/>
 
+                    </Form.Group>
+                    {/*
+                        Password
+                    */}
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Password" value={this.state.password} name="password" onChange={this.handleChange}/>
                     </Form.Group>
-                    {/* <Form.Group controlId="formBasicChecbox">
-                        <Form.Check type="checkbox" label="Check me out" />
-                    </Form.Group> */}
+
                     <Button variant="primary" type="submit">
                         Submit
                     </Button>
@@ -93,9 +144,8 @@ class LoginPage extends React.Component {
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        login: (username, password) => {
-            console.log(username, password)
-            dispatch(loginUser(username, password))
+        signup: (username, email, password) => {
+            dispatch(signUpUser(username, email, password))
         }
     }
 }
