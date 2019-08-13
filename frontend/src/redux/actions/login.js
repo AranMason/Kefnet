@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const LOGIN = 'LOGIN';
-const succcessfulLoginUser = payload => {
+const successfulLoginUser = payload => {
     console.log("Successful")
     return {
         type: LOGIN,
@@ -24,10 +24,22 @@ const awaitingUserChange = payload => ({
 
 // export const failedLogin = 'SUCCESSFUL_LOGIN';
 
+export function signUpUser(username, email, password) {
+
+    return function(dispatch){
+        dispatch(awaitingUserChange());
+
+        return axios.post('/login/signup', {
+            username, email, password
+        }).then(res => {
+
+            dispatch(successfulLoginUser(res.data));
+
+        })
+    }
+}
 
 export function loginUser(username, password) {
-
-    console.log("Attempting Login");
 
     return function(dispatch){
         dispatch(awaitingUserChange())
@@ -39,7 +51,7 @@ export function loginUser(username, password) {
             password
         }).then(res => {
 
-            dispatch(succcessfulLoginUser(res.data))
+            dispatch(successfulLoginUser(res.data))
 
         })
     }
@@ -69,7 +81,7 @@ export function getLoginStatus() {
             withCredentials: true
         }).then(res => {
             console.log("Loging Status: ", res.data);
-            dispatch(succcessfulLoginUser(res.data))
+            dispatch(successfulLoginUser(res.data))
           }).catch(err => {
               dispatch(completelogOutUser())
           });
