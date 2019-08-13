@@ -16,9 +16,7 @@ function sanitiseUser(user){
     }
 }
 
-router.post('/', handler.isLoggedIn, (req, res) => {
-
-
+router.post('/', handler.loginAttempt, (req, res) => {
 
     var username = req.body.username,
         password = req.body.password;
@@ -32,7 +30,7 @@ router.post('/', handler.isLoggedIn, (req, res) => {
         }  else {
             
             req.session.user = sanitiseUser(user.dataValues);
-
+            req.session.user_sid = req.cookies.user_sid //Associate Cookie for validation
             req.session.loginAttempts = 0; //If they have managed to login, we don't need to keep tracking
 
             console.log("Successful Login", req.session, req.sessionID)
@@ -44,7 +42,7 @@ router.post('/', handler.isLoggedIn, (req, res) => {
     });
 });
 
-router.get('/status', handler.isLoggedIn, (req, res) => {
+router.get('/status', (req, res) => {
 
     res.json({
         success: req.session.user ? true : false,
