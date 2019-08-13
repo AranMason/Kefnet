@@ -1,23 +1,24 @@
 // middleware function to check for logged-in users
-var isLoggedIn = (req, res, next) => {
+var validateCookie = (req, res, next) => {
 
-    // req.session.reload((err) => {
-
-        // console.log("Session Id: ", req.sessionID);
-        // console.log("Session: ", req.session);
-        // console.log("Cookie: ", req.cookies);
-
-        // if(err){
-        //     console.log("Error: ", err)
-        // }
-
+    if(!req.cookie){
+        res.status(403).send("No valid session found")
+    }
+    else if (req.cookie.user_sid !== req.session.user_sid){
+        res.status(403).send("Invalid authentication");
+    }
+    else {
         next();
-    // })   
+    }
+
+    
 };
 
 var loginAttempt = (req, res, next) => {
 
     req.session.loginAttempt = (req.session.loginAttempt || 0) + 1;
+
+
 
     if(req.session.loginAttempt > 5){
         res.status(401).send("Too many login attempts")
@@ -53,7 +54,7 @@ var validateSignup = (req, res, next) => {
 }
 
 module.exports = {
-    isLoggedIn,
+    validateCookie,
     loginAttempt,
     validateSignup
 }
