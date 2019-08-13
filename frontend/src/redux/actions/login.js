@@ -1,5 +1,3 @@
-// import { LOGIN, SIGN_UP, LOG_OUT } from '../actionTypes';
-
 import axios from 'axios';
 
 export const LOGIN = 'LOGIN';
@@ -65,13 +63,15 @@ export function logOutUser() {
 export function getLoginStatus() {
     return function(dispatch) {
 
-        dispatch(awaitingUserChange())
+        // dispatch(awaitingUserChange())
 
         return axios.get('/login/status', {
             withCredentials: true
         }).then(res => {
             console.log("Loging Status: ", res.data);
             dispatch(succcessfulLoginUser(res.data))
+          }).catch(err => {
+              dispatch(completelogOutUser())
           });
 
     }

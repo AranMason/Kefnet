@@ -1,0 +1,16 @@
+.Loading{
+    width: 100%;
+    height: 100%;
+    /* text-align: center; */
+    /* display: block; */
+    /* padding: 50%; */
+    display: inline-block; 
+    text-align: center;
+    vertical-align: middle;
+    font-size: 2em;
+}
+
+.Loading-icon {
+    color: #0E68AB;
+    vertical-align: middle;
+}

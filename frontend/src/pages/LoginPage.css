@@ -1,0 +1,12 @@
+.LoginPage {
+    padding: 0px 5em;
+}
+
+.LoginPage-form {
+    margin-top: 3em;
+    border-color: #0E68AB;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 1em;
+}

@@ -1,0 +1,40 @@
+.Login-container{
+    display: flex;
+    justify-content: flex-end;
+    align-content: flex-end;
+    height: 100%;
+}
+
+.Login-loggedout-container{
+    display: flex;
+    flex: 1;
+}
+
+.Login-button {
+    width: 5em;
+    height: 100%;
+    border-style: none;
+    background-color: #0E68AB;
+    border-radius: 5px;
+    font-size: 1em;
+    padding: 0.5em 0.5em;
+    display: inline-block;
+    margin-left: 0.5em;
+}
+
+.Login-button:hover {
+    background-color: #0e5bab;
+}
+
+.Login-loggedin {
+    display: inline-block;
+    flex: 1;
+    flex-direction: row;
+}
+
+.Login-welcome {
+    display: inline-block;
+    flex: 1;
+    text-align: right;
+    vertical-align: center;
+}
