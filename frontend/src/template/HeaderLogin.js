@@ -1,7 +1,7 @@
 import React from 'react';
 import './HeaderLogin.css'
 
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
@@ -18,22 +18,6 @@ class HeaderLogin extends React.Component {
             isLoggedIn: false,
             redirect: false
         }
-
-        this.login = this.login.bind(this);
-        this.signup = this.signup.bind(this);
-    }
-
-    login(){
-        // this.props.login("Aran", "12345");
-        this.setState({
-            redirect: '/login'
-        })
-    }
-
-    signup(){
-        this.setState({
-            redirect: '/signup'
-        })
     }
 
     renderLoginButton(){
@@ -43,14 +27,6 @@ class HeaderLogin extends React.Component {
                 <Loading />
             )
         }
-
-        if(this.state.redirect){
-            
-            return (
-                <Redirect to={this.state.redirect}/>
-            )
-        }
-
 
         if(this.props.isLoggedIn){
 
@@ -71,12 +47,18 @@ class HeaderLogin extends React.Component {
         } else {
             return (
                 <div className="Login-loggedout-container">
-                    <button className="Login-button Login-loggedout" onClick={this.login}>
-                        Login
-                    </button>
-                    <button className="Login-button Login-loggedout" onClick={this.signup}>
-                        Signup
-                    </button>
+                    <Link to="/login">
+                        <button className="Login-button Login-loggedout">
+                            Login
+                        </button>
+                    </Link>
+                    
+                    <Link to="/signup">
+                        <button className="Login-button Login-loggedout">
+                            Signup
+                        </button>
+                    </Link>
+                    
                 </div>
                 
             )
