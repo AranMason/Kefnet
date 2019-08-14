@@ -10,9 +10,17 @@ var validateCookie = (req, res, next) => {
     else {
         next();
     }
-
-    
 };
+
+
+var isLoggedIn = (req, res, next) => {
+    if(!req.session.user){
+        res.status(401).send("You need to be logged in");
+    }
+    else {
+        next()
+    }
+}
 
 var loginAttempt = (req, res, next) => {
 
@@ -56,5 +64,6 @@ var validateSignup = (req, res, next) => {
 module.exports = {
     validateCookie,
     loginAttempt,
-    validateSignup
+    validateSignup,
+    isLoggedIn
 }

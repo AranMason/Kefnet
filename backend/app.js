@@ -5,6 +5,16 @@ var session = require('express-session');
 var morgan = require('morgan');
 var cors = require('cors');
 
+// console.log(process.env)
+
+if(!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+    console.log("Loading Dev .env")
+    var dotenv = require('dotenv');
+    dotenv.config();
+}
+
+
+
 var Session = require('./middleware/session-handler')
 
 
@@ -54,12 +64,14 @@ app.use((req, res, next) => {
 });
 
 var login = require('./routes/login');
-var dashboard = require('./routes/dashboard');
 var index = require('./routes');
+var deck = require('./routes/decks');
+var match = require('./routes/match');
 
 app.use('/', index);
 app.use('/login', login);
-app.use('/dashboard', dashboard);
+app.use('/deck', deck);
+app.use('/match', match);
 
 // route for handling 404 requests(unavailable routes)
 app.use(function (req, res, next) {

@@ -1,20 +1,38 @@
 var Sequelize = require('sequelize');
 var bcrypt = require('bcrypt');
+const uuid = require('uuid/v4')
 
 // create a sequelize instance with our local postgres database information.
-var sequelize = new Sequelize('postgres://postgres:admin@localhost:5432/auth-system');
+var sequelize = new Sequelize(process.env.DATABASE_URL);
 
 // setup User model and its fields.
 var User = sequelize.define('users', {
+    id: {
+      type: Sequelize.UUID,
+      unique: true,
+      primaryKey: true,
+      allowNull: false,
+      defaultValue: uuid()
+    },
     username: {
         type: Sequelize.STRING,
         unique: true,
-        allowNull: false
+        allowNull: false,
+        validate: {
+          isNotEmpty: true,
+          len: [6, 128],
+          isAlphanumeric: {
+            msg: "Only Alpha Numeric Characters are allowed"
+          }
+        }
     },
     email: {
         type: Sequelize.STRING,
         unique: true,
-        allowNull: false
+        allowNull: false,
+        validate: {
+          isEmail: true
+        }
     },
     password: {
         type: Sequelize.STRING,
