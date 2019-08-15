@@ -6,7 +6,7 @@ var sequelize = new Sequelize(process.env.DATABASE_URL);
 
 const User = require('./user');
 
-var { validFormats, validProviders } = require('./constraints');
+var { validFormats, validProvidersList } = require('./constraints');
 
 // setup User model and its fields.
 var Deck = sequelize.define('decks', {
@@ -37,7 +37,7 @@ var Deck = sequelize.define('decks', {
         type: Sequelize.STRING,
         allowNull: true,
         validate: {
-            in: validProviders
+            in: validProvidersList
         }
     },
     provider_id: {

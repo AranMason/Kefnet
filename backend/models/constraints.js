@@ -1,8 +1,17 @@
 validFormats = ['Commander/EDH', 'Brawl', 'Oathbreaker', 'Standard', 'Modern', 'Legacy', 'Other'];
 
-validProviders = ['MTG Goldfish', 'Archidekt', 'Tappedout'];
+validProviders = {
+    MTG_GOLDFISH: 'MTG Goldfish',
+    ARCHIDEKT: 'Archidekt',
+    TAPPEDOUT: 'Tappedout'
+}
+
+
 
 module.exports = {
     validFormats,
-    validProviders
+    validProviders,
+    validProvidersList: () => Object.keys(this.validProviders).map((provider) => {
+        return this.validProviders(provider);
+    })
 }
