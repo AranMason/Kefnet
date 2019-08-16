@@ -2,11 +2,11 @@ import React from 'react';
 import './LoginPage.css';
 
 import { connect } from 'react-redux';
-import { loginUser } from '../redux/actions/login'
+import { loginUser } from '../../redux/actions/login'
 
 import { Form, Button, Alert } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
-import Loading from '../template/Loading';
+import Loading from '../../template/Loading';
 
 class LoginPage extends React.Component {
 
@@ -75,7 +75,7 @@ class LoginPage extends React.Component {
 
         return (
             <div className="LoginPage" onSubmit={this.handleSubmit}>
-                
+
                 <Form className="LoginPage-form">
                     {this.invalidLogin()}
                     <Form.Group controlId="formBasicEmail">

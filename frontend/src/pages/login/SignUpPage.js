@@ -2,11 +2,11 @@ import React from 'react';
 import './LoginPage.css';
 
 import { connect } from 'react-redux';
-import { signUpUser } from '../redux/actions/login'
+import { signUpUser } from '../../redux/actions/login'
 
 import { Form, Button, Alert } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
-import Loading from '../template/Loading';
+import Loading from '../../template/Loading';
 
 class LoginPage extends React.Component {
 
@@ -29,7 +29,7 @@ class LoginPage extends React.Component {
     handleSubmit(e){
         e.preventDefault();
 
-        
+
 
         if(!this.validateUsername(this.state.username)){
             this.setState({
@@ -50,15 +50,15 @@ class LoginPage extends React.Component {
             this.setState({
                 submitted: true
             })
-    
+
             this.props.signup(this.state.username, this.state.email, this.state.password);
-    
+
             this.setState({
                 attemptedLogin: true
             })
         }
 
-        
+
     }
 
     handleChange(e){
@@ -108,7 +108,7 @@ class LoginPage extends React.Component {
 
         return (
             <div className="LoginPage" onSubmit={this.handleSubmit}>
-                
+
                 <Form className="LoginPage-form">
                     {this.renderAlert(this.state.rejected)}
                     {/*
