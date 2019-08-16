@@ -27,9 +27,12 @@ class AppRouter extends React.Component{
 					<Route path="/dashboard" component={Dashboard} />
 
 					<Route path='/deck' exact component={DeckHomePage} />
+					<Route path='/deck/add' exact component={null} />
 					<Route path='/deck/:deck_id' component={null}/>
+					<Route path='/deck/:deck_id/edit' component={null}/>
 
 					<Route path='/match' exact component={null} />
+					<Route path='/match/create' component={null}/>
 					<Route path='/match/:match_id/edit' component={EditMatch} />
 					<Route path='/match/:match_id' component={ViewMatch} />
 
