@@ -17,6 +17,9 @@ import EditMatch from './pages/match/EditMatch';
 
 class AppRouter extends React.Component{
 
+	//https://reacttraining.com/react-router/web/example/animated-transitions
+	//Could explore using CSSTransition for page changes?
+
 	render(){
 		return(
 			<Router>
