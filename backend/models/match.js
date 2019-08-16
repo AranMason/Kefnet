@@ -29,8 +29,6 @@ var Match = sequelize.define('match', {
     }
 });
 
-
-
 // create all the defined tables in the specified database.
 sequelize.sync()
     .then(() => console.log('decks table has been successfully created, if one doesn\'t exist'))

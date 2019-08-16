@@ -10,14 +10,7 @@ const Deck = require('./decks');
 
 // setup User model and its fields.
 var MatchParticipant = sequelize.define('match_participants', {
-    id: {
-      type: Sequelize.UUID,
-      unique: true,
-      primaryKey: true,
-      allowNull: false,
-      defaultValue: uuid()
-    },
-    turn: { //Deck Name
+    turn_order: { //Deck Name
         type: Sequelize.INTEGER,
         allowNull: true,
         validate: {
@@ -31,20 +24,21 @@ var MatchParticipant = sequelize.define('match_participants', {
         allowNull: false,
         defaultValue: false
     }
-    // TODO: Add League
 }, {
     hooks: {
 
     }
 });
 
-// Match.hasMany(MatchParticipant);
 // MatchParticipant.belongsTo(Match);
+Match.belongsToMany(User, {
+	through: MatchParticipant
+});
 
-User.belongsToMany(MatchParticipant, {through: Match});
-MatchParticipant.belongsTo(User, {through: Match});
-MatchParticipant.hasOne(Deck)
-
+// MatchParticipant.belongsTo(User);
+User.belongsToMany(Match, {
+	through: MatchParticipant
+});
 
 // create all the defined tables in the specified database.
 sequelize.sync()
