@@ -3,9 +3,15 @@ import React from 'react';
 class DeckPage extends React.Component {
 	render() {
 		return (
-			<p>
-				{`View deck: ${this.props.location.params.deck_id}`}
-			</p>
+			<div>
+				<p>
+					{`View deck: ${this.props.location.params.deck_id}`}
+				</p>
+				<Link to={`/deck/${this.props.location.params.deck_id}/edit`}>
+					Edit
+				</Link>
+			</div>
+
 		)
 	}
 }
