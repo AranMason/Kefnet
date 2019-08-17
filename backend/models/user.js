@@ -19,7 +19,7 @@ var User = sequelize.define('users', {
         unique: true,
         allowNull: false,
         validate: {
-          isNotEmpty: true,
+          notEmpty: true,
           len: [6, 128],
           isAlphanumeric: {
             msg: "Only Alpha Numeric Characters are allowed"
