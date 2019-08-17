@@ -9,13 +9,13 @@ import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 
 
-import HeaderLogin from './template/HeaderLogin';
+import HeaderLogin from './components/HeaderLogin';
 
 import AppRouter from './AppRouter'
 import { BrowserRouter as Router} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { getLoginStatus } from './redux/actions/login';
-import Loading from './template/Loading';
+import Loading from './components/Loading';
 
 
 class App extends React.Component {
