@@ -30,8 +30,8 @@ router.post('/', handler.loginAttempt, (req, res) => {
         }  else {
             
             req.session.user = sanitiseUser(user.dataValues);
-            req.session.user_sid = req.cookies.user_sid //Associate Cookie for validation
-            req.session.loginAttempts = 0; //If they have managed to login, we don't need to keep tracking
+            req.session.user_sid = req.sessionID //Associate Cookie for validation
+            // req.session.loginAttempts = 0; //If they have managed to login, we don't need to keep tracking
 
             console.log("Successful Login", req.session, req.sessionID)
             res.json({
@@ -58,13 +58,13 @@ router.post('/signup', handler.validateSignup, (req, res) => {
         })
         .then(user => {
             req.session.user = user.dataValues;
-            res.json({
+            res.status(200).json({
                 success: true,
                 user: sanitiseUser(user.dataValues)
             })
         })
         .catch(error => {
-            res.status(500).send("Error: ", error);
+            res.status(500).send("Error: " + error);
         });
     });
 
