@@ -3,6 +3,7 @@ import React from 'react';
 import Loading from '../../template/Loading';
 
 import { Form } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 
 class DeckPage extends React.Component {
 
@@ -11,6 +12,7 @@ class DeckPage extends React.Component {
 
 		this.state = {
 			isLoading: true,
+			redirect: false,
 			deck_id: props.location.params.deck_id,
 			name: '',
 			external: {
@@ -18,6 +20,10 @@ class DeckPage extends React.Component {
 				provider: null,
 				id: null
 			},
+			owner: {
+				name: 'Unknown',
+				id: null
+			}
 			// provider: 'None'
 		}
 
@@ -28,6 +34,22 @@ class DeckPage extends React.Component {
 	componentWillMount(){
 		if(this.state.deck_id){
 			//Load deck
+			axios.get(`/deck/${this.state.deck_id}`).then(res => {
+				this.setState({
+					deck_id: req.body.id,
+					external: {
+						url: req.body.url,
+						provider: rwq.body.provider,
+						id: req.body.provider_id
+					},
+					isLoading: false
+				})
+			}).catch(err => {
+				console.log(err);
+				this.setState({
+					redirect: '/'
+				})
+			})
 
 			this.setState({
 				isLoading: false
@@ -51,7 +73,7 @@ class DeckPage extends React.Component {
 			this.setState({
 				external: {
 					url: e.target.value
-					//TODO Extract provider?
+					// TODO Extract provider?
 					//TODO Extract provider deck id
 				}
 			})
@@ -83,6 +105,12 @@ class DeckPage extends React.Component {
 			return (<Loading />)
 		}
 
+		if(this.state.redirect){
+			return (
+				<Redirect to={this.state.redirect}/>
+			)
+		}
+
 		return (
 			<div>
 				{this.renderTitle()}
@@ -93,6 +121,12 @@ class DeckPage extends React.Component {
 				</Form>
 				<div className="Deck-provider">
 					{this.state.external.provider}
+				</div>
+				<div>
+					<Link to={`/users/${this.state.owner.id}`}>
+						{this.state.owner.name}'s deck'
+					</Link>
+						
 				</div>	
 			</div>
 		)
