@@ -3,8 +3,8 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res) => {
-  res.statusCode(404);
-  res.send("Could not find resource, check your URL")
+  // res.statusCode(404);
+  res.status(404).send("Could not find resource, check your URL")
 });
 
 // route for user logout
