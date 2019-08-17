@@ -40,6 +40,8 @@ User.belongsToMany(Match, {
 	through: MatchParticipant
 });
 
+MatchParticipant.hasOne(Deck);
+
 // create all the defined tables in the specified database.
 sequelize.sync()
     .then(() => console.log('match_participants table has been successfully created, if one doesn\'t exist'))
