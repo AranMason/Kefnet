@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Loading from '../../template/Loading';
+import Loading from '../../components/Loading';
 
 import axios from 'axios';
 
@@ -33,7 +33,7 @@ class DeckPage extends React.Component {
 		this.renderTitle = this.renderTitle.bind(this);
 	}
 
-	componentWillMount(){
+	componentDidMount(){
 		if(this.state.deck_id){
 			//Load deck
 			axios.get(`/deck/${this.state.deck_id}`).then(res => {
@@ -100,6 +100,8 @@ class DeckPage extends React.Component {
 	}
 
 	render() {
+
+		console.log('Deck Id: ', this.state.deck_id)
 
 		if(this.state.isLoading){
 			return (<Loading />)

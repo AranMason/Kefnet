@@ -3,13 +3,14 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import HomePage from './pages/HomePage';
-import Loading from './template/Loading';
+import Loading from './components/Loading';
 
 import LoginPage from './pages/login/LoginPage';
 import SignUpPage from './pages/login/SignUpPage';
 import Dashboard from './pages/Dashboard';
 
 import DeckHomePage from './pages/decks/DeckHomePage';
+import ViewDeck from './pages/decks/ViewDeck';
 import EditDeck from './pages/decks/EditDeck';
 
 import ViewMatch from './pages/match/ViewMatch';
@@ -32,7 +33,7 @@ class AppRouter extends React.Component{
 
 					<Route path='/deck' exact component={DeckHomePage} />
 					<Route path='/deck/add' exact component={EditDeck} />
-					<Route path='/deck/:deck_id' component={null}/>
+					<Route path='/deck/:deck_id' component={ViewDeck}/>
 					<Route path='/deck/:deck_id/edit' component={EditDeck}/>
 
 					<Route path='/match' exact component={null} />

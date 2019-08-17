@@ -6,7 +6,7 @@ import { signUpUser } from '../../redux/actions/login'
 
 import { Form, Button, Alert } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
-import Loading from '../../template/Loading';
+import Loading from '../../components/Loading';
 
 class LoginPage extends React.Component {
 
@@ -57,8 +57,6 @@ class LoginPage extends React.Component {
                 attemptedLogin: true
             })
         }
-
-
     }
 
     handleChange(e){
@@ -122,7 +120,7 @@ class LoginPage extends React.Component {
                         Email
                     */}
                     <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Username</Form.Label>
+                        <Form.Label>Email</Form.Label>
                         <Form.Control type="email" placeholder="Enter email" value={this.state.email} isValid={this.validateEmail(this.state.email)} name="email" onChange={this.handleChange}/>
 
                     </Form.Group>

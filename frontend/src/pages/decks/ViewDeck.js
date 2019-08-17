@@ -3,7 +3,7 @@ import React from 'react';
 import Loading from '../../components/Loading';
 
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 class DeckPage extends React.Component {
 
