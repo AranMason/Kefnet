@@ -12,10 +12,11 @@ import { connect } from 'react-redux';
 import HeaderLogin from './template/HeaderLogin';
 
 import AppRouter from './AppRouter'
-
-
+import { BrowserRouter as Router} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { getLoginStatus } from './redux/actions/login';
 import Loading from './template/Loading';
+
 
 class App extends React.Component {
 
@@ -31,9 +32,11 @@ class App extends React.Component {
 
     return (
       <div className="App">
-          <Helmet title="Kefnet - Magic Stat Tracker">
+        <Helmet title="Kefnet - Magic Stat Tracker">
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
-          </Helmet>
+        </Helmet>
+        <Router>
+          
 
           <header className="App-header">
             <Link to="/" className="App-header-title">
@@ -45,12 +48,15 @@ class App extends React.Component {
           </header>
 
           <section className="App-content">
-			<AppRouter/>
+            <AppRouter/>
           </section>
 
-          <section className="App-footer">
+          
+        
+        <section className="App-footer">
             Built by AngelOfMercy - Aran Mason
           </section>
+        </Router>
       </div>
     );
   }

@@ -2,8 +2,10 @@ import React from 'react';
 
 import Loading from '../../template/Loading';
 
+import axios from 'axios';
+
 import { Form } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 class DeckPage extends React.Component {
 
@@ -13,7 +15,7 @@ class DeckPage extends React.Component {
 		this.state = {
 			isLoading: true,
 			redirect: false,
-			deck_id: props.location.params.deck_id,
+			deck_id: props.location.params && props.location.params.deck_id,
 			name: '',
 			external: {
 				url: '',
@@ -36,11 +38,11 @@ class DeckPage extends React.Component {
 			//Load deck
 			axios.get(`/deck/${this.state.deck_id}`).then(res => {
 				this.setState({
-					deck_id: req.body.id,
+					deck_id: res.body.id,
 					external: {
-						url: req.body.url,
-						provider: rwq.body.provider,
-						id: req.body.provider_id
+						url: res.body.url,
+						provider: res.body.provider,
+						id: res.body.provider_id
 					},
 					isLoading: false
 				})
@@ -78,8 +80,6 @@ class DeckPage extends React.Component {
 				}
 			})
 		}
-
-		this.setState
 	}
 
 	renderTitle(){

@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import HomePage from './pages/HomePage';
+import Loading from './template/Loading';
 
 import LoginPage from './pages/login/LoginPage';
 import SignUpPage from './pages/login/SignUpPage';
@@ -21,8 +22,7 @@ class AppRouter extends React.Component{
 	//Could explore using CSSTransition for page changes?
 
 	render(){
-		return(
-			<Router>
+		return(		
 				<Switch>
 					<Route path="/" exact component={HomePage} />
 
@@ -42,7 +42,6 @@ class AppRouter extends React.Component{
 
 					<Route component={Loading} />
 				</Switch>
-			</Router>
 		)
 	}
 }
