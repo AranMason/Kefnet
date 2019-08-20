@@ -2,11 +2,12 @@
 var validateCookie = (req, res, next) => {
 
     if(!req.cookies){
-        res.status(403).send("No valid session found");
+        res.status(403).send("No valid session found, please try logging in again");
     }
-    else if (req.cookies.user_sid !== req.session.user_sid){
-        res.status(403).send("Invalid authentication");
-    }
+    // else if (req.cookies.user_sid !== req.session.user_sid){
+    //     console.log(req.cookies, req.session);
+    //     res.status(403).send("You do not appear to be logged in");
+    // }
     else {
         next();
     }
