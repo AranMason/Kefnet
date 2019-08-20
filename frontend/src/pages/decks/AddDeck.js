@@ -1,5 +1,5 @@
 import React from 'react';
-import './EditDeck.css'
+import './AddDeck.css'
 
 import Loading from '../../components/Loading';
 
@@ -24,7 +24,8 @@ class AddDeck extends React.Component {
 				Red: false,
 				Black: false,
 				Green: false
-			}
+			},
+			format: 'Standard'
 		}
 
 		this.handleChange = this.handleChange.bind(this);
@@ -41,6 +42,7 @@ class AddDeck extends React.Component {
 	}
 
 	handleChange(e){
+
 		if(e.target.name === "name"){
 			this.setState({
 				name: e.target.value
@@ -49,6 +51,11 @@ class AddDeck extends React.Component {
 		else if(e.target.name === "url"){
 			this.setState({
 				url: e.target.value
+			})
+		}
+		else if(e.target.name === "format"){
+			this.setState({
+				format: e.target.value
 			})
 		}
 		else if(e.target){
@@ -83,7 +90,7 @@ class AddDeck extends React.Component {
 			name: this.state.name,
 			url: this.state.url,
 			colour_identity,
-			format: 'Standard'
+			format: this.state.format
 		};
 
 		// TODO
@@ -170,7 +177,7 @@ class AddDeck extends React.Component {
 
 					<Form.Group controlId="exampleForm.ControlSelect1">
 						<Form.Label>Select Format</Form.Label>
-						<Form.Control as="select">
+						<Form.Control as="select" name="format" onChange={this.handleChange} value={this.state.format}>
 							{['Commander/EDH', 'Brawl', 'Oathbreaker', 'Standard', 'Modern', 'Legacy', 'Other'].map(items => {
 								return (
 									<option key={items}>{items}</option>
