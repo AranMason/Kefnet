@@ -11,7 +11,7 @@ import Dashboard from './pages/Dashboard';
 
 import DeckHomePage from './pages/decks/DeckHomePage';
 import ViewDeck from './pages/decks/ViewDeck';
-import EditDeck from './pages/decks/EditDeck';
+import EditDeck from './pages/decks/AddDeck';
 
 import ViewMatch from './pages/match/ViewMatch';
 import EditMatch from './pages/match/EditMatch';
@@ -34,7 +34,7 @@ class AppRouter extends React.Component{
 					<Route path='/deck' exact component={DeckHomePage} />
 					<Route path='/deck/add' exact component={EditDeck} />
 					<Route path='/deck/:deck_id' component={ViewDeck}/>
-					<Route path='/deck/:deck_id/edit' component={EditDeck}/>
+					<Route path='/deck/:deck_id/edit' component={null}/>
 
 					<Route path='/match' exact component={null} />
 					<Route path='/match/create' component={EditMatch}/>
