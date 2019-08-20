@@ -15,7 +15,7 @@ import AppRouter from './AppRouter'
 import { BrowserRouter as Router} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { getLoginStatus } from './redux/actions/login';
-import Loading from './components/Loading';
+// import Loading from './components/Loading';
 
 
 class App extends React.Component {
@@ -33,7 +33,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Helmet title="Kefnet - Magic Stat Tracker">
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+            
         </Helmet>
         <Router>
           
