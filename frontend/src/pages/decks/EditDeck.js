@@ -23,11 +23,17 @@ class EditDeck extends React.Component {
 				provider: null,
 				id: null
 			},
+			colour: {
+				White: false,
+				Blue: false,
+				Red: false,
+				Black: false,
+				Green: false
+			},
 			owner: {
 				name: 'Unknown',
 				id: null
 			}
-			// provider: 'None'
 		}
 
 		this.handleChange = this.handleChange.bind(this);
@@ -69,7 +75,6 @@ class EditDeck extends React.Component {
 	}
 
 	handleChange(e){
-
 		if(e.target.name === "name"){
 			this.setState({
 				name: e.target.value
@@ -79,8 +84,14 @@ class EditDeck extends React.Component {
 			this.setState({
 				external: {
 					url: e.target.value
-					// TODO Extract provider?
-					// TODO Extract provider deck id
+				}
+			})
+		}
+		else if(e.target){
+			this.setState({
+				colour: {
+					...this.state.colour,
+					[e.target.name]: e.target.checked
 				}
 			})
 		}
@@ -91,11 +102,25 @@ class EditDeck extends React.Component {
 		this.setState({
 			isLoading: true
 		})
+
+		const translateColour = {
+			White: 'W',
+			Blue: 'U',
+			Black: 'B',
+			Red: 'R',
+			Green: 'G'
+		}
+
+		const colour_identity = Object.keys(this.state.colour).map(colour => {
+			return this.state.colour[colour] ? translateColour[colour] : ''
+		}).join('');
+
+		console.log("CI: ", colour_identity);
 		// TODO
 		axios.post('/deck/add', {
 			name: this.state.name,
 			url: this.state.external.url,
-			colour_identity: "wubrg".toUpperCase(),
+			colour_identity,
 			format: 'Standard'
 		}).then(res => {
 			console.log(res);
@@ -172,11 +197,22 @@ class EditDeck extends React.Component {
 						<div>
 						{['White', 'Blue', 'Black', 'Red', 'Green'].map(colour => {
 						return (
-							<Form.Check inline label={colour} type="checkbox" id={`inline-${colour}`} key={colour}/>
+							<Form.Check name={colour} onChange={this.handleChange} checked={this.state.colour[colour]}inline label={colour} type="checkbox" id={`inline-${colour}`} key={colour}/>
 						)
 					})}
 
 						</div>
+					</Form.Group>
+
+					<Form.Group controlId="exampleForm.ControlSelect1">
+						<Form.Label>Select Format</Form.Label>
+						<Form.Control as="select">
+							{['Commander/EDH', 'Brawl', 'Oathbreaker', 'Standard', 'Modern', 'Legacy', 'Other'].map(items => {
+								return (
+									<option key={items}>{items}</option>
+								)
+							})}
+						</Form.Control>
 					</Form.Group>
 
 					<Button variant="primary" type="submit">
