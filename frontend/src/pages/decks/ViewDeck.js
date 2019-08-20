@@ -20,7 +20,7 @@ class DeckPage extends React.Component {
 		}
 	}
 
-	componentWillMount(){
+	componentDidMount(){
 		axios.get(`/deck/${this.state.deck_id}`).then(res => {
 			this.setState({
 				isLoading: false,
