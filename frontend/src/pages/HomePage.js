@@ -12,6 +12,9 @@ class HomePage extends React.Component {
                 </h2>
                 <ul>
                     <li>
+                        Public profiles?
+                    </li>
+                    <li>
                         Build user dashboard
                     </li>
                     <li>
