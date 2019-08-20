@@ -8,7 +8,7 @@ import axios from 'axios';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 
-class EditDeck extends React.Component {
+class AddDeck extends React.Component {
 
 	constructor(props){
 		super(props)
@@ -16,23 +16,14 @@ class EditDeck extends React.Component {
 		this.state = {
 			isLoading: true,
 			redirect: false,
-			deck_id: props.location.params && props.location.params.deck_id,
 			name: '',
-			external: {
-				url: '',
-				provider: null,
-				id: null
-			},
+			url: '',
 			colour: {
 				White: false,
 				Blue: false,
 				Red: false,
 				Black: false,
 				Green: false
-			},
-			owner: {
-				name: 'Unknown',
-				id: null
 			}
 		}
 
@@ -44,34 +35,9 @@ class EditDeck extends React.Component {
 	}
 
 	componentDidMount(){
-		if(this.state.deck_id){
-			//Load deck
-			axios.get(`/deck/${this.state.deck_id}`).then(res => {
-				this.setState({
-					deck_id: res.body.id,
-					external: {
-						url: res.body.url,
-						provider: res.body.provider,
-						id: res.body.provider_id
-					},
-					isLoading: false
-				})
-			}).catch(err => {
-				console.log(err);
-				this.setState({
-					redirect: '/'
-				})
-			})
-
-			this.setState({
-				isLoading: false
-			})
-		}
-		else {
-			this.setState({
-				isLoading: false
-			})
-		}
+		this.setState({
+			isLoading: false
+		})
 	}
 
 	handleChange(e){
@@ -82,9 +48,7 @@ class EditDeck extends React.Component {
 		}
 		else if(e.target.name === "url"){
 			this.setState({
-				external: {
-					url: e.target.value
-				}
+				url: e.target.value
 			})
 		}
 		else if(e.target){
@@ -117,7 +81,7 @@ class EditDeck extends React.Component {
 
 		const request_body = {
 			name: this.state.name,
-			url: this.state.external.url,
+			url: this.state.url,
 			colour_identity,
 			format: 'Standard'
 		};
@@ -179,7 +143,7 @@ class EditDeck extends React.Component {
 
 					<Form.Group>
 						<Form.Label>Deck URL</Form.Label>
-    					<Form.Control name="url" onChange={this.handleChange} value={this.state.external.url} type="text" placeholder="Deck url..." />
+    					<Form.Control name="url" onChange={this.handleChange} value={this.state.url} type="text" placeholder="Deck url..." />
 						<Form.Text className="text-muted">
     					  Provide a link to your decklist, currently supporting: 
 						  <ul>
@@ -226,4 +190,4 @@ class EditDeck extends React.Component {
 	}
 }
 
-export default EditDeck;
+export default AddDeck;
