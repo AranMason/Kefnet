@@ -1,7 +1,7 @@
 import React from 'react';
 import './HeaderLogin.css'
 
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
