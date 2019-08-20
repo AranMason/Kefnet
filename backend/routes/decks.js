@@ -10,13 +10,16 @@ router.options('*', cors())
 
 function validateDeckSubmission(req, res, next){
     if(!req.body.name && !req.body.format && !req.body.colour_identity){
-        res.status(400).send("Missing arguments for deck submission")
+        res.status(400).send("Missing arguments (name, format, colour_identity) for deck submission")
     }
     else if(!/^(W?U?B?R?G?)$/.test(req.body.colour_identity)){
         res.status.send("Invalid Colour Identity");
     }
-    else if(!validFormats.indexOf(req.body.format) > -1){
+    else if(validFormats.indexOf(req.body.format) === -1){
         res.status(400).send("Not a valid deck format, found " + req.body.format);
+    }
+    else if(req.body.name.length <= 4){
+        res.status(400).send('Deck must have a name of at least 4 characters');
     }
     else {
         next()
@@ -47,6 +50,9 @@ function getProviderId(name, path){
 
 function retrieveProviderMetaData(data_url){
 
+    if(!data_url){
+        return null
+    }
     const url = new URL(data_url);
 
     const name = getProviderHostName(url);
@@ -69,18 +75,19 @@ router.post('/add', handler.validateCookie, handler.isLoggedIn, validateDeckSubm
 
     const meta = retrieveProviderMetaData(req.body.url);
 
-    if(!meta){
-        res.status(403).send("Unsupported deck provider")
+    let data = {
+        userId,
+        name,
+        url: req.body.url,
+        format
+    }
+
+    if(meta){
+        data.provider = meta.name;
+        data.provider_id = meta.provider_id;
     }
     else {
-        Deck.create({
-            userId,
-            name,
-            url: req.body.url,
-            provider: meta.name,
-            provider_id: meta.provider_id,
-            format
-        }).then(res => {
+        Deck.create(data).then(data_res => {
             res.status(200).send("Created deck " + name);
         }).catch(err => {
             res.status(400).send("Failed to create deck: " + err);
