@@ -115,20 +115,20 @@ class EditDeck extends React.Component {
 			return this.state.colour[colour] ? translateColour[colour] : ''
 		}).join('');
 
-		console.log("CI: ", colour_identity);
-		// TODO
-		axios.post('/deck/add', {
+		const request_body = {
 			name: this.state.name,
 			url: this.state.external.url,
 			colour_identity,
 			format: 'Standard'
-		}).then(res => {
-			console.log(res);
+		};
+
+		// TODO
+		axios.post('/deck/add', request_body).then(res => {
 			this.setState({
+				isLoading: false,
 				redirect: '/dashboard'
 			})
 		}).catch(err => {
-			console.log(err.response);
 			this.setState({
 				isLoading: false,
 				alert: {
