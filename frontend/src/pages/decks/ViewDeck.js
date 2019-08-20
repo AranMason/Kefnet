@@ -2,6 +2,8 @@ import React from 'react';
 
 import Loading from '../../components/Loading';
 
+import DeckList from './components/DeckList';
+
 import axios from 'axios';
 import { Redirect, Link } from 'react-router-dom';
 
@@ -50,6 +52,7 @@ class DeckPage extends React.Component {
 				<p>
 					{`View deck: ${this.props.location.params.deck_id}`}
 				</p>
+				<DeckList id={this.state.deck_id}/>
 				<Link to={`/deck/${this.props.location.params.deck_id}/edit`}>
 					Edit
 				</Link>
