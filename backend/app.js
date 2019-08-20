@@ -8,7 +8,7 @@ var cors = require('cors');
 // console.log(process.env)
 
 if(!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
-    console.log("Loading Dev .env")
+    // console.log("Loading Dev .env")
     var dotenv = require('dotenv');
     dotenv.config();
 }
@@ -41,6 +41,7 @@ app.use(cookieParser());
 
 // initialize express-session to allow us track the logged-in user across sessions.
 app.use(session({
+    store: new (require('connect-pg-simple')(session))(),
     key: 'user_sid',
     secret: 'somerandonstuffs',
     resave: false,
