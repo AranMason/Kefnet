@@ -101,10 +101,10 @@ router.get('/users', handler.validateCookie, handler.isLoggedIn, (req, res) => {
         where: {
             userId: req.session.user.id
         }
-    }).then(res => {
-        console.log(res);
+    }).then(res_data => {
+        console.log(res_data);
 
-        res.json(res);
+        res.json(res_data);
     }).catch(err => {
         res.status(500).send(err);
     })
@@ -124,8 +124,8 @@ router.route('/:deck_id')
             where: {
                 id: req.params.deck_id
             }
-        }).then(res => {
-
+        }).then(data => {
+            console.log(data);
         }).catch(err => {
             res.status(500).send(err);
         })
@@ -149,8 +149,8 @@ router.route('/:deck_id')
                 id: req.params.deck_id,
                 userId: req.session.user.id
             }
-        }).then(res => {
-            res.status(200).send(`${res.name} succesfully deleted!`);
+        }).then(data => {
+            res.status(200).send(`${data.name} succesfully deleted!`);
         }).catch(err => {
             res.status(500).send(err);
         })
