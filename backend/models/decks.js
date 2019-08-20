@@ -31,7 +31,10 @@ var Deck = sequelize.define('decks', {
     },
     url:{
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: true,
+        validate: {
+            isUrl: true
+        }
     },
     provider: {
         type: Sequelize.STRING,
