@@ -1,10 +1,10 @@
 // middleware function to check for logged-in users
 var validateCookie = (req, res, next) => {
 
-    if(!req.cookie){
-        res.status(403).send("No valid session found")
+    if(!req.cookies){
+        res.status(403).send("No valid session found");
     }
-    else if (req.cookie.user_sid !== req.session.user_sid){
+    else if (req.cookies.user_sid !== req.session.user_sid){
         res.status(403).send("Invalid authentication");
     }
     else {
