@@ -12,7 +12,7 @@ var User = sequelize.define('users', {
       unique: true,
       primaryKey: true,
       allowNull: false,
-      defaultValue: uuid()
+      defaultValue: () => uuid()
     },
     username: {
         type: Sequelize.STRING,

@@ -13,7 +13,7 @@ var Match = sequelize.define('match', {
       unique: true,
       primaryKey: true,
       allowNull: false,
-      defaultValue: uuid()
+      defaultValue: () => uuid()
     },
     format: {
         type: Sequelize.STRING,

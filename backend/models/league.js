@@ -12,7 +12,7 @@ var League = sequelize.define('leagues', {
       unique: true,
       primaryKey: true,
       allowNull: false,
-      defaultValue: uuid()
+      defaultValue: () => uuid()
     },
     format: {
         type: Sequelize.STRING,
