@@ -36,7 +36,9 @@ class HeaderLogin extends React.Component {
                 <div className="Login-loggedin">
                     {}
                     <div className="Login-welcome">
-                        {_.sample(intros)} {this.props.user.username}
+                        <Link to="/dashboard">
+                            {_.sample(intros)} {this.props.user.username}
+                        </Link>
                     </div>
                     
                     <button className="Login-button" onClick={this.props.logout}>
@@ -78,7 +80,6 @@ class HeaderLogin extends React.Component {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         login: (username, password) => {
-            console.log(username, password)
             dispatch(loginUser(username, password))
         },
         logout: () => {
@@ -88,7 +89,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(state);
     return {
         isLoggedIn: state.login.isLoggedIn,
         awaitingLogin: state.login.awaitingLogin,

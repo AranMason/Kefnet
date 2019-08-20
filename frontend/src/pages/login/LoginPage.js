@@ -39,9 +39,6 @@ class LoginPage extends React.Component {
     }
 
     invalidLogin(){
-
-        console.log(this.state.attemptedLogin)
-
         if(this.state.attemptedLogin && !this.props.awaitingLogin){
             return (
                 <Alert style={{
@@ -56,9 +53,6 @@ class LoginPage extends React.Component {
     }
 
     render(){
-
-        console.log(this.props.location.search);
-
         if(this.props.isLoggedIn){
             const params = new URLSearchParams(this.props.location.search);
 
@@ -104,14 +98,12 @@ class LoginPage extends React.Component {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         login: (username, password) => {
-            console.log(username, password)
             dispatch(loginUser(username, password))
         }
     }
 }
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(state);
     return {
         isLoggedIn: state.login.isLoggedIn,
         awaitingLogin: state.login.awaitingLogin,

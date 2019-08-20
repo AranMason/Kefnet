@@ -149,7 +149,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(state);
     return {
         isLoggedIn: state.login.isLoggedIn,
         awaitingLogin: state.login.awaitingLogin,

@@ -31,9 +31,7 @@ router.post('/', handler.loginAttempt, (req, res) => {
             
             req.session.user = sanitiseUser(user.dataValues);
             req.session.user_sid = req.cookies.user_sid //Associate Cookie for validation
-            // req.session.loginAttempts = 0; //If they have managed to login, we don't need to keep tracking
 
-            console.log("Successful Login", req.session, req.sessionID)
             res.json({
                 success: true,
                 user: req.session.user

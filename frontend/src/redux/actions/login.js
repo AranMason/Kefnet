@@ -66,14 +66,16 @@ export function logOutUser() {
 }
 
 export function getLoginStatus() {
+
+    
+
     return function(dispatch) {
 
-        // dispatch(awaitingUserChange())
+        dispatch(awaitingUserChange())
 
         return axios.get('/login/status', {
             withCredentials: true
         }).then(res => {
-            console.log("Loging Status: ", res.data);
             dispatch(successfulLoginUser(res.data))
           }).catch(err => {
               dispatch(completelogOutUser())
