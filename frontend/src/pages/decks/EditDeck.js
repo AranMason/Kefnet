@@ -1,13 +1,14 @@
 import React from 'react';
+import './EditDeck.css'
 
 import Loading from '../../components/Loading';
 
 import axios from 'axios';
 
-import { Form } from 'react-bootstrap';
-import { Redirect, Link } from 'react-router-dom';
+import { Form, Button, Alert } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 
-class DeckPage extends React.Component {
+class EditDeck extends React.Component {
 
 	constructor(props){
 		super(props)
@@ -30,7 +31,10 @@ class DeckPage extends React.Component {
 		}
 
 		this.handleChange = this.handleChange.bind(this);
-		this.renderTitle = this.renderTitle.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+
+		this.renderAlert = this.renderAlert.bind(this);
+		// this.renderTitle = this.renderTitle.bind(this);
 	}
 
 	componentDidMount(){
@@ -76,32 +80,55 @@ class DeckPage extends React.Component {
 				external: {
 					url: e.target.value
 					// TODO Extract provider?
-					//TODO Extract provider deck id
+					// TODO Extract provider deck id
 				}
 			})
 		}
 	}
 
-	renderTitle(){
-		if(this.state.deck_id){
+	handleSubmit(e){
+		e.preventDefault();
+		this.setState({
+			isLoading: true
+		})
+		// TODO
+		axios.post('/deck/add', {
+			name: this.state.name,
+			url: this.state.external.url,
+			colour_identity: "wubrg".toUpperCase(),
+			format: 'Standard'
+		}).then(res => {
+			console.log(res);
+			this.setState({
+				redirect: '/dashboard'
+			})
+		}).catch(err => {
+			console.log(err.response);
+			this.setState({
+				isLoading: false,
+				alert: {
+					type: 'warning',
+					message: err.response.data
+				}
+			})
+		})
+	}
+
+	renderAlert(){
+
+		if(this.state.alert){
 			return (
-				<h2>
-					Editing {this.state.name}
-				</h2>
+				<Alert variant={this.state.alert.type}>
+					{this.state.alert.message}
+				</Alert>
 			)
+		} else {
+			return null;
 		}
-		else {
-			return (
-				<h2>
-					New Deck
-				</h2>
-			)
-		}
+
 	}
 
 	render() {
-
-		console.log('Deck Id: ', this.state.deck_id)
 
 		if(this.state.isLoading){
 			return (<Loading />)
@@ -114,25 +141,53 @@ class DeckPage extends React.Component {
 		}
 
 		return (
-			<div>
-				{this.renderTitle()}
-				<Form>
-					<input name="name" type="text" onChange={this.handleChange} value={this.state.name} placeholder="Deck name"></input>
+			<div className="EditDeck">
+				<h2>
+					Add new Deck
+				</h2>
+				<Form onSubmit={this.handleSubmit}>
+					{this.renderAlert()}
+					<Form.Group>
+						<Form.Label>Deck name</Form.Label>
+    					<Form.Control name="name" onChange={this.handleChange} value={this.state.name} type="text" placeholder="Deck name..." />
+					</Form.Group>
 
-					<input name="url" type="text" onChange={this.handleChange} value={this.state.external.url} placeholder="Deck link" />
+					<Form.Group>
+						<Form.Label>Deck URL</Form.Label>
+    					<Form.Control name="url" onChange={this.handleChange} value={this.state.external.url} type="text" placeholder="Deck url..." />
+						<Form.Text className="text-muted">
+    					  Provide a link to your decklist, currently supporting: 
+						  <ul>
+							  <li>MTG Goldfish</li>
+							  <li>Tappedout</li>
+							  <li>Archidekt</li>
+						  </ul>
+    					</Form.Text>
+					</Form.Group>
+
+					<Form.Group>
+						<Form.Label>
+							Deck Colour
+						</Form.Label>
+						<div>
+						{['White', 'Blue', 'Black', 'Red', 'Green'].map(colour => {
+						return (
+							<Form.Check inline label={colour} type="checkbox" id={`inline-${colour}`} key={colour}/>
+						)
+					})}
+
+						</div>
+					</Form.Group>
+
+					<Button variant="primary" type="submit">
+    Submit
+  </Button>
+					
 				</Form>
-				<div className="Deck-provider">
-					{this.state.external.provider}
-				</div>
-				<div>
-					<Link to={`/users/${this.state.owner.id}`}>
-						{this.state.owner.name}'s deck'
-					</Link>
-						
-				</div>	
+					
 			</div>
 		)
 	}
 }
 
-export default DeckPage;
+export default EditDeck;
