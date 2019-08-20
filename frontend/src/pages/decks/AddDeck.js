@@ -7,6 +7,8 @@ import axios from 'axios';
 
 import { Form, Button, Alert } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
+import FormatDropdown from './components/FormatDropdown';
+import ColourIdentity from './components/ColourIdentity';
 
 class AddDeck extends React.Component {
 
@@ -21,11 +23,12 @@ class AddDeck extends React.Component {
 			colour: {
 				White: false,
 				Blue: false,
-				Red: false,
 				Black: false,
+				Red: false,
 				Green: false
 			},
-			format: 'Standard'
+			format: 'Standard',
+			formatList: []
 		}
 
 		this.handleChange = this.handleChange.bind(this);
@@ -161,30 +164,11 @@ class AddDeck extends React.Component {
     					</Form.Text>
 					</Form.Group>
 
-					<Form.Group>
-						<Form.Label>
-							Deck Colour
-						</Form.Label>
-						<div>
-						{['White', 'Blue', 'Black', 'Red', 'Green'].map(colour => {
-						return (
-							<Form.Check name={colour} onChange={this.handleChange} checked={this.state.colour[colour]}inline label={colour} type="checkbox" id={`inline-${colour}`} key={colour}/>
-						)
-					})}
+					<ColourIdentity title=""
+						onChange={this.handleChange}
+						value={this.state.colour} />
 
-						</div>
-					</Form.Group>
-
-					<Form.Group controlId="exampleForm.ControlSelect1">
-						<Form.Label>Select Format</Form.Label>
-						<Form.Control as="select" name="format" onChange={this.handleChange} value={this.state.format}>
-							{['Commander/EDH', 'Brawl', 'Oathbreaker', 'Standard', 'Modern', 'Legacy', 'Other'].map(items => {
-								return (
-									<option key={items}>{items}</option>
-								)
-							})}
-						</Form.Control>
-					</Form.Group>
+					<FormatDropdown name="format" onChange={this.handleChange} value={this.state.format} />
 
 					<Button variant="primary" type="submit">
     Submit
