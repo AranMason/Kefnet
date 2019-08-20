@@ -40,7 +40,7 @@ User.belongsToMany(Match, {
 	through: MatchParticipant
 });
 
-MatchParticipant.hasOne(Deck);
+Deck.hasOne(MatchParticipant);
 
 // create all the defined tables in the specified database.
 sequelize.sync()
