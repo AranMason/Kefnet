@@ -14,7 +14,8 @@ function validateDeckSubmission(req, res, next){
         res.status(400).send("Missing arguments (name, format, colour_identity) for deck submission")
     }
     else if(!/^(W?U?B?R?G?)$/.test(req.body.colour_identity)){
-        res.status.send("Invalid Colour Identity");
+        
+        res.status(400).send("Invalid Colour Identity. Got " + req.body.colour_identity);
     }
     else if(validFormats.indexOf(req.body.format) === -1){
         res.status(400).send("Not a valid deck format, found " + req.body.format);
