@@ -15,7 +15,7 @@ var Deck = sequelize.define('decks', {
       unique: true,
       primaryKey: true,
       allowNull: false,
-      defaultValue: uuid()
+      defaultValue: () => uuid()
     },
     name: { //Deck Name
         type: Sequelize.STRING,
