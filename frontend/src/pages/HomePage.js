@@ -4,25 +4,55 @@ class HomePage extends React.Component {
     render(){
         return (
             <div>
-                <p>
-                    HomePage
-                </p>
-                TODO List:
+                <h1>
+                    TODO List:
+                </h1>
+                <h2>
+                    Users
+                </h2>
                 <ul>
                     <li>
-                        Build Homepage - Need ideas
+                        Build user dashboard
                     </li>
                     <li>
-                        Build Matches
+                        Allow user password reset
                     </li>
                     <li>
-                        Build User Dashboard
+                        Provide visual analytics of match data
                     </li>
                     <li>
-                        Support Password Changes
+                        Allow you to invite and add "Friends"
+                    </li>
+                </ul>
+
+                <h2>
+                    Decks
+                </h2>
+                <ul>
+                    <li>
+                        Allow "Public" decks
                     </li>
                     <li>
-                        Support variant formats
+                        Allow editing decks
+                    </li>
+                    <li>
+                        Pull meta data from decklist suppliers such as MTG Goldfish; Archideck and Tappedout.
+                    </li>
+                </ul>
+
+                <h2>Matchs</h2>
+                <ul>
+                    <li>
+                        Create match for recording
+                    </li>
+                    <li>
+                        Track turn order; decks player; users played and who won.
+                    </li>
+                    <li>
+                        Provider user statistics
+                    </li>
+                    <li>
+                        Allow a match to be shared, and other users "claim" being a particpant in the match
                     </li>
                 </ul>
             </div>
