@@ -1,0 +1,24 @@
+.Dashboard {
+    margin: 1em;
+    padding: 1em;
+    border-style: solid;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 80%;
+}
+
+.Dashboard > section {
+    display: flex;
+}
+
+.Dashboard-user {
+    /* flex: 1; */
+    flex-direction: column;
+}
+
+.Dashboard-list {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
