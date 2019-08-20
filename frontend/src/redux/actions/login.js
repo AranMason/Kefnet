@@ -2,7 +2,6 @@ import axios from 'axios';
 
 export const LOGIN = 'LOGIN';
 const successfulLoginUser = payload => {
-    console.log("Successful")
     return {
         type: LOGIN,
         payload
@@ -44,8 +43,6 @@ export function loginUser(username, password) {
     return function(dispatch){
         dispatch(awaitingUserChange())
 
-        console.log(`/login`)
-
         return axios.post(`/login`, {
             username,
             password
@@ -59,14 +56,10 @@ export function loginUser(username, password) {
 
 export function logOutUser() {
 
-    console.log("Leaving")
-
     return function (dispatch) {
-        console.log("Test")
         dispatch(awaitingUserChange());
 
         return axios.post(`/logout`).then(res => {
-            console.log("Log out: ", res);
             dispatch(completelogOutUser())
         })
     }
