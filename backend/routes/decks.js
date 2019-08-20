@@ -3,6 +3,7 @@ var router = express.Router();
 var cors = require('cors');
 
 var Deck = require('../models/decks');
+var User = require('../models/user');
 var handler = require('../middleware/session-handler');
 const { validFormats, validProviders } = require('../models/constraints');
 
@@ -102,8 +103,6 @@ router.get('/users', handler.validateCookie, handler.isLoggedIn, (req, res) => {
             userId: req.session.user.id
         }
     }).then(res_data => {
-        console.log(res_data);
-
         res.json(res_data);
     }).catch(err => {
         res.status(500).send(err);
@@ -123,9 +122,10 @@ router.route('/:deck_id')
         Deck.findOne({
             where: {
                 id: req.params.deck_id
-            }
+            },
+            include: User
         }).then(data => {
-            console.log(data);
+            res.status(200).json(data);
         }).catch(err => {
             res.status(500).send(err);
         })

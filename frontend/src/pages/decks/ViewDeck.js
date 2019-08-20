@@ -1,10 +1,12 @@
 import React from 'react';
+import './ViewDeck.css';
 
 import Loading from '../../components/Loading';
 
 import DeckList from './components/DeckList';
 
 import axios from 'axios';
+import { Button } from 'react-bootstrap';
 import { Redirect, Link } from 'react-router-dom';
 
 class DeckPage extends React.Component {
@@ -15,24 +17,27 @@ class DeckPage extends React.Component {
 		this.state = {
 			isLoading: true,
 			redirect: false,
-			deck_id: this.props.location.props && this.props.location.params.deck_id,
+			deck_id: this.props.match.params && this.props.match.params.deck_id,
 			deck: null
 		}
 	}
 
 	componentDidMount(){
-		axios.get(`/deck/${this.state.deck_id}`).then(res => {
+		console.log(this.state)
+		axios.get(`/deck/${this.state.deck_id}`).then(data => {
+			console.log("Response: ", data.data);
 			this.setState({
 				isLoading: false,
-				deck: res.body
+				deck: data.data
 			})
 		}).catch(err => {
-			console.err(err);
+			console.error(err);
 			this.setState({
-				redirect: '/deck'
+				redirect: '/deck/add'
 			})
 		})
 	}
+
 	render() {
 
 		if(this.state.isLoading || !this.state.deck){
@@ -48,16 +53,32 @@ class DeckPage extends React.Component {
 		}
 		
 		return (
-			<div>
-				<p>
-					{`View deck: ${this.props.location.params.deck_id}`}
-				</p>
+			<div className="ViewDeck">
+				<h1>
+					{this.state.deck.name}
+				</h1>
+				<div>
+					By <Link to={`/user/${this.state.deck.user.id}`}>
+						{this.state.deck.user.username}
+					</Link>
+					<Link to={`deck/${this.state.deck_id}/edit`}>
+						<Button>
+							Edit
+						</Button>
+					</Link>
+				</div>
+				
+				
+				{/* <div>
+					<Link to="/dashboard">
+						{this.state.deck}
+					</Link>
+				</div> */}
 				<DeckList id={this.state.deck_id}/>
-				<Link to={`/deck/${this.props.location.params.deck_id}/edit`}>
+				<Link to={`/deck/${this.state.deck_id}/edit`}>
 					Edit
 				</Link>
 			</div>
-
 		)
 	}
 }
