@@ -21,7 +21,7 @@ var Deck = sequelize.define('decks', {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-          isNotEmpty: true
+          len: [4, 255]
         }
     },
     public: {
@@ -37,7 +37,11 @@ var Deck = sequelize.define('decks', {
         type: Sequelize.STRING,
         allowNull: true,
         validate: {
-            in: validProvidersList
+            isProvider: (val) => {
+                if(!(!val || validProvidersList.indexOf(val) > -1)){
+                    throw new Error("Not a valid provider, if there is no provider, please use Null")
+                }
+            } // Validating provider using 
         }
     },
     provider_id: {
@@ -47,7 +51,7 @@ var Deck = sequelize.define('decks', {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-            in: validFormats
+            isIn: [validFormats]
         }
     },
     colour_identity: {
