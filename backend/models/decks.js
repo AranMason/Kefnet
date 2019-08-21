@@ -57,14 +57,26 @@ var Deck = sequelize.define('decks', {
             isIn: [validFormats]
         }
     },
-    colour_identity: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        defaultValue: '',
-        validate: {
-            is: /^(W?U?B?R?G?)$/
-        }
-    }
+    white: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+    },
+    blue: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+    },
+    black: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+    },
+    red: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+    },
+    green: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+    },
 }, {
     hooks: {
 
