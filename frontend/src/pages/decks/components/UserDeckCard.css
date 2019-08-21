@@ -1,0 +1,44 @@
+.UserDecksCard {
+
+}
+
+.UserDeckCard-data {
+    display: flex;
+    flex-direction: row;
+    min-height: 20px;
+}
+
+.UserDeckCard-title {
+    flex: 1;
+}
+.UserDeckCard-button {
+    padding: 0.5em;
+}
+
+.UserDeckCard-bar-container {
+    min-height: 5px;
+    width: 100%;
+    display: flex;
+}
+
+.UserDeckCard-bar {
+    flex: 1;
+    align-content: center;
+    justify-content: center;
+}
+
+.UserDeckCard-bar-w {
+    background-color: rgb(249,250,244);
+}
+.UserDeckCard-bar-u {
+    background-color: rgb(14,104, 171);
+}
+.UserDeckCard-bar-b {
+    background-color: rgb(21,11,0);
+}
+.UserDeckCard-bar-r {
+    background-color: rgb(211,32,42);
+}
+.UserDeckCard-bar-g {
+    background-color: rgb(0, 114, 65);
+}

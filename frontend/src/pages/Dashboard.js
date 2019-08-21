@@ -3,7 +3,7 @@ import './Dashboard.css';
 
 import Loading from '../components/Loading';
 
-import UserDeckList from '../components/UserDeckList'
+import UserDeckList from './decks/UserDeckList'
 
 import { Button } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
