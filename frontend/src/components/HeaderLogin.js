@@ -22,22 +22,16 @@ class HeaderLogin extends React.Component {
 
     renderLoginButton(){
 
-        if(this.props.awaitingLogin){
-            return (
-                <Loading />
-            )
-        }
-
         if(this.props.isLoggedIn){
 
-            const intros = ['Welcome', 'Hi', 'Kia ora']
+            // const intros = ['Welcome', 'Hi', 'Kia ora']
 
             return (
                 <div className="Login-loggedin">
                     {}
                     <div className="Login-welcome">
                         <Link to="/dashboard">
-                            {_.sample(intros)} {this.props.user.username}
+                            Welcome {this.props.user.username}
                         </Link>
                     </div>
                     

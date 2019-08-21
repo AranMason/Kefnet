@@ -26,6 +26,10 @@ class App extends React.Component {
 
   componentDidMount() {
     this.props.loginStatus();
+    setInterval(() => {
+      console.log("Checking login")
+      this.props.loginStatus();
+    }, 300000) // Every 5 Minutes
   }
 
   render() {
