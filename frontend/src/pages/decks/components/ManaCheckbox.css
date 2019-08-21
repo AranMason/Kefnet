@@ -1,0 +1,13 @@
+.ManaCheckbox {
+    padding: 5px;
+    transition: opacity 0.5s;
+}
+
+.ManaCheckbox-enabled {
+
+}
+
+.ManaCheckbox-disabled {
+    opacity: 0.4;
+    /* background-color: red;  */
+}

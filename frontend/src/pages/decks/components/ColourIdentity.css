@@ -1,0 +1,8 @@
+input[type="checkbox"]:not(:checked).ColourIdentity-input ~ div{
+    /* background-color: pink; */
+    opacity: 0.2;
+}
+
+.ColourIdentity-input {
+    display: none;
+}

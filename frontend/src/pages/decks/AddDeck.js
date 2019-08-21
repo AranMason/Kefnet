@@ -5,7 +5,7 @@ import Loading from '../../components/Loading';
 
 import axios from 'axios';
 
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Button, Alert, Col } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import FormatDropdown from './components/FormatDropdown';
 import ColourIdentity from './components/ColourIdentity';
@@ -45,8 +45,15 @@ class AddDeck extends React.Component {
 	}
 
 	handleChange(e){
-
-		if(e.target.name === "name"){
+		if(e.target === "ColourIdentity"){
+			this.setState({
+				colour: {
+					...this.state.colour,
+					[e.value]: !this.state.colour[e.value]
+				}
+			})
+		}
+		else if(e.target.name === "name"){
 			this.setState({
 				name: e.target.value
 			})
@@ -59,14 +66,6 @@ class AddDeck extends React.Component {
 		else if(e.target.name === "format"){
 			this.setState({
 				format: e.target.value
-			})
-		}
-		else if(e.target){
-			this.setState({
-				colour: {
-					...this.state.colour,
-					[e.target.name]: e.target.checked
-				}
 			})
 		}
 	}
@@ -164,11 +163,19 @@ class AddDeck extends React.Component {
     					</Form.Text>
 					</Form.Group>
 
-					<ColourIdentity title=""
-						onChange={this.handleChange}
-						value={this.state.colour} />
-
-					<FormatDropdown name="format" onChange={this.handleChange} value={this.state.format} />
+					<Form.Row>
+						<Form.Group as={Col} md="4">
+							<ColourIdentity title=""
+								onChange={this.handleChange}
+								value={this.state.colour} />
+						</Form.Group>
+						<Form.Group as={Col} md="8">
+							<FormatDropdown 
+								name="format"
+								onChange={this.handleChange}
+								value={this.state.format} />
+						</Form.Group>
+					</Form.Row>
 
 					<Button variant="primary" type="submit">
     Submit

@@ -1,15 +1,28 @@
 import React from 'react';
+import './ColourIdentity.css';
 
 import { Form } from 'react-bootstrap';
+import ManaIcon from '../../../components/ManaIcon';
+import ManaCheckbox from './ManaCheckbox';
 
 class ColourIdentity extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
-            colours: ['White', 'Blue', 'Black', 'Red', 'Green']
+            colours: ['White', 'Blue', 'Black', 'Red', 'Green'],
         }
+
+        // this.onClick = this.onClick.bind(this);
+        this.handleChangeIcon = this.handleChangeIcon.bind(this);
+    }
+
+    handleChangeIcon(colour){
+        this.props.onChange({
+            target: "ColourIdentity",
+            value: colour
+        })
     }
 
     render() {
@@ -17,20 +30,22 @@ class ColourIdentity extends React.Component {
             <Form.Group>
                 <Form.Label>
                     {this.props.title || 'Colour Identity'}
-						</Form.Label>
-                <div>
-                    {this.state.colours.map(colour => {
+                </Form.Label>
+
+                <div style={{
+                    display: "flex",
+                    flexDirection: "row",
+                }}>
+                    {this.state.colours.map(col => {
+                        
                         return (
-                            <Form.Check 
-                                name={colour}
-                                onChange={this.props.onChange}
-                                checked={this.props.value[colour]}
-                                inline label={colour}
-                                type="checkbox"
-                                key={colour} />
+                            <ManaCheckbox
+                                key={col}
+                                icon={col}
+                                checked={this.props.value[col]}
+                                onChange={this.handleChangeIcon}/>
                         )
                     })}
-
                 </div>
             </Form.Group>
 
