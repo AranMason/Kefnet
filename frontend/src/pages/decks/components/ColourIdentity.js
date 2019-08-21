@@ -2,7 +2,6 @@ import React from 'react';
 import './ColourIdentity.css';
 
 import { Form } from 'react-bootstrap';
-import ManaIcon from '../../../components/ManaIcon';
 import ManaCheckbox from './ManaCheckbox';
 
 class ColourIdentity extends React.Component {
@@ -11,7 +10,7 @@ class ColourIdentity extends React.Component {
         super(props);
 
         this.state = {
-            colours: ['White', 'Blue', 'Black', 'Red', 'Green'],
+            colours: ['white', 'blue', 'black', 'red', 'green'],
         }
 
         // this.onClick = this.onClick.bind(this);
@@ -19,17 +18,19 @@ class ColourIdentity extends React.Component {
     }
 
     handleChangeIcon(colour){
-        this.props.onChange({
-            target: "ColourIdentity",
-            value: colour
-        })
+        if(this.props.onChange){
+            this.props.onChange({
+                target: "ColourIdentity",
+                value: colour
+            })
+        }
     }
 
     render() {
         return (
             <Form.Group>
                 <Form.Label>
-                    {this.props.title || 'Colour Identity'}
+                    {this.props.title}
                 </Form.Label>
 
                 <div style={{

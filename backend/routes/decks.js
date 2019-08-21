@@ -13,10 +13,10 @@ function validateDeckSubmission(req, res, next){
     if(!req.body.name && !req.body.format && !req.body.colour_identity){
         res.status(400).send("Missing arguments (name, format, colour_identity) for deck submission")
     }
-    else if(!/^(W?U?B?R?G?)$/.test(req.body.colour_identity)){
+    // else if(!/^(W?U?B?R?G?)$/.test(req.body.colour_identity)){
         
-        res.status(400).send("Invalid Colour Identity. Got " + req.body.colour_identity);
-    }
+    //     res.status(400).send("Invalid Colour Identity. Got " + req.body.colour_identity);
+    // }
     else if(validFormats.indexOf(req.body.format) === -1){
         res.status(400).send("Not a valid deck format, found " + req.body.format);
     }
@@ -77,11 +77,13 @@ router.post('/add', handler.validateCookie, handler.isLoggedIn, validateDeckSubm
 
     const meta = retrieveProviderMetaData(req.body.url);
 
+    console.log(req.body);
+
     let data = {
         userId,
         name,
         url: req.body.url,
-        colour_identity,
+        ...req.body.colour_identity,
         format
     }
 

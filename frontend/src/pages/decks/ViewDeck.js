@@ -23,9 +23,7 @@ class DeckPage extends React.Component {
 	}
 
 	componentDidMount(){
-		console.log(this.state)
 		axios.get(`/deck/${this.state.deck_id}`).then(data => {
-			console.log("Response: ", data.data);
 			this.setState({
 				isLoading: false,
 				deck: data.data

@@ -24,11 +24,11 @@ class AddDeck extends React.Component {
 			name: '',
 			url: '',
 			colour: {
-				White: false,
-				Blue: false,
-				Black: false,
-				Red: false,
-				Green: false
+				white: false,
+				blue: false,
+				black: false,
+				red: false,
+				green: false
 			},
 			format: 'Standard',
 			formatList: []
@@ -79,22 +79,10 @@ class AddDeck extends React.Component {
 			isLoading: true
 		})
 
-		const translateColour = {
-			White: 'W',
-			Blue: 'U',
-			Black: 'B',
-			Red: 'R',
-			Green: 'G'
-		}
-
-		const colour_identity = Object.keys(this.state.colour).map(colour => {
-			return this.state.colour[colour] ? translateColour[colour] : ''
-		}).join('');
-
 		const request_body = {
 			name: this.state.name,
 			url: this.state.url,
-			colour_identity,
+			colour_identity: this.state.colour,
 			format: this.state.format
 		};
 

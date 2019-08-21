@@ -22,12 +22,11 @@ class UserDeckList extends React.Component{
 
     componentDidMount(){
         axios.get('/deck/users').then(data => {
-            console.log(data);
             this.setState({
                 decks: data.data || []
             })
         }).catch(err => {
-            console.log(err);
+            console.error(err);
         }).finally(() => {
             this.setState({
                 isLoading: false
@@ -46,6 +45,7 @@ class UserDeckList extends React.Component{
         return (
             <div>
                 {this.state.decks.map(deck => {
+                    console.log(deck)
                     return (
                         <UserDeckCard key={deck.id} deck={deck} />
                     )

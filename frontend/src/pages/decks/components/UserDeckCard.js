@@ -11,6 +11,9 @@ import ColourIdentity from './ColourIdentity';
 class UserDeckCard extends React.Component {
 
     render() {
+
+        console.log(this.props.deck)
+
         return (
             <div className="UserDecksCard">
                 <div className="UserDeckCard-data">
@@ -35,13 +38,7 @@ class UserDeckCard extends React.Component {
                 <div style={{
                     width: "100%"
                 }}>
-                    <ColourIdentity value={{
-                        White: true,
-                        Blue: true,
-                        Black: true,
-                        Red: true,
-                        Green: true
-                    }} />
+                    <ColourIdentity value={this.props.deck} />
                     {/* <div className="UserDeckCard-bar-container">
                         {"wub".split('').map(colour => {
                             return (

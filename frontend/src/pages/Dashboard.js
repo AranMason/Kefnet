@@ -39,8 +39,6 @@ class Dashboard extends React.Component {
 			)
 		}
 
-		console.log("Props: ", this.props);
-
 		return (
 			<div className="Dashboard">
 				<section className="Dashboard-user">

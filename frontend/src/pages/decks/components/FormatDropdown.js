@@ -19,7 +19,6 @@ class FormatDropdown extends React.Component {
 
     componentDidMount(){
         Axios.get('/deck/formats').then(res => {
-            console.log(res)
             this.setState({
                 isLoading: false,
                 formatList: res.data.formats
