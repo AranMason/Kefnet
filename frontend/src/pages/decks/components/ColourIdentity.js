@@ -38,11 +38,18 @@ class ColourIdentity extends React.Component {
                     flexDirection: "row",
                 }}>
                     {this.state.colours.map(col => {
+
+                        if(this.props.hide && !this.props.value[col]){
+                            return (
+                                null
+                            )
+                        }
                         
                         return (
                             <ManaCheckbox
                                 key={col}
                                 icon={col}
+                                size={this.props.size}
                                 checked={this.props.value[col]}
                                 onChange={this.handleChangeIcon}/>
                         )

@@ -19,7 +19,7 @@ class ManaCheckbox extends React.Component {
 
         return (
             <div onClick={this.onClick} className={this.props.checked ? "ManaCheckbox ManaCheckbox-enabled" : "ManaCheckbox ManaCheckbox-disabled"}>
-                <ManaIcon icon={this.props.icon} size="2em" />
+                <ManaIcon icon={this.props.icon} size={this.props.size || "2em"} />
             </div>
         )
     }

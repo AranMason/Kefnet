@@ -38,7 +38,7 @@ class UserDeckCard extends React.Component {
                 <div style={{
                     width: "100%"
                 }}>
-                    <ColourIdentity value={this.props.deck} />
+                    <ColourIdentity hide value={this.props.deck} />
                     {/* <div className="UserDeckCard-bar-container">
                         {"wub".split('').map(colour => {
                             return (

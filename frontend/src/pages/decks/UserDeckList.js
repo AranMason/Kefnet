@@ -5,8 +5,8 @@ import axios from 'axios';
 
 import Loading from '../../components/Loading';
 import UserDeckCard from './components/UserDeckCard';
-import { Button, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import ColourIdentity from './components/ColourIdentity';
+import FormatDropdown from './components/FormatDropdown';
 
 class UserDeckList extends React.Component{
 
@@ -44,12 +44,24 @@ class UserDeckList extends React.Component{
 
         return (
             <div>
-                {this.state.decks.map(deck => {
-                    console.log(deck)
-                    return (
-                        <UserDeckCard key={deck.id} deck={deck} />
-                    )
-                })}
+
+                <div>
+                    <ColourIdentity value={{
+
+                    }}
+                    size="1.5em"/>
+                    {/* <FormatDropdown /> */}
+                </div>
+                <div>
+                    {this.state.decks.map(deck => {
+                        console.log(deck)
+                        return (
+                            <UserDeckCard key={deck.id} deck={deck} />
+                        )
+                    })}
+                </div>
+
+                
                 
             </div>
         )
