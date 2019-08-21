@@ -81,6 +81,7 @@ router.post('/add', handler.validateCookie, handler.isLoggedIn, validateDeckSubm
         userId,
         name,
         url: req.body.url,
+        colour_identity,
         format
     }
 
