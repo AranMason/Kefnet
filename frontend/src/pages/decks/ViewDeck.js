@@ -6,7 +6,7 @@ import Loading from '../../components/Loading';
 import DeckList from './components/DeckList';
 
 import axios from 'axios';
-import { Button } from 'react-bootstrap';
+import { Button, Row, Col } from 'react-bootstrap';
 import { Redirect, Link } from 'react-router-dom';
 
 class DeckPage extends React.Component {
@@ -54,9 +54,17 @@ class DeckPage extends React.Component {
 		
 		return (
 			<div className="ViewDeck">
-				<h1>
-					{this.state.deck.name}
-				</h1>
+				<Row>
+					<Col md="8">
+						<h1>
+							{this.state.deck.name}
+						</h1>
+					</Col>
+					<Col>
+						ID: {this.state.deck.colour_identity}
+					</Col>
+				</Row>
+				
 				<div>
 					By <Link to={`/user/${this.state.deck.user.id}`}>
 						{this.state.deck.user.username}
@@ -69,15 +77,24 @@ class DeckPage extends React.Component {
 				</div>
 				
 				
-				{/* <div>
-					<Link to="/dashboard">
-						{this.state.deck}
-					</Link>
-				</div> */}
 				<DeckList id={this.state.deck_id}/>
 				<Link to={`/deck/${this.state.deck_id}/edit`}>
 					Edit
 				</Link>
+
+				
+					<ul>
+						<li>
+							Recent Matches
+						</li>
+						<li>
+							Pull data from provider
+						</li>
+						<li>
+							Make it so only owner can edit
+						</li>
+					</ul>
+				
 			</div>
 		)
 	}
