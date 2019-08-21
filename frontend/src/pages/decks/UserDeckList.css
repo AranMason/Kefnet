@@ -14,21 +14,7 @@
     display: flex;
 }
 
-.UserDeckList-bar-w {
-    background-color: rgb(249,250,244);
-}
-.UserDeckList-bar-u {
-    background-color: rgb(14,104, 171);
-}
-.UserDeckList-bar-b {
-    background-color: rgb(21,11,0);
-}
-.UserDeckList-bar-r {
-    background-color: rgb(211,32,42);
-}
-.UserDeckList-bar-g {
-    background-color: rgb(0, 114, 65);
-}
+
 
 .UserDeckList-bar {
     flex: 1;
